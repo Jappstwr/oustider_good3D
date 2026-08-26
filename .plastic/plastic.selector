@@ -1,0 +1,4 @@
+repository "outsuider_example/outsuider_example@5773891772420@cloud"
+  path "/"
+    br "/main"
+    co "/main"
