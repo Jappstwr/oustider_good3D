@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     PlayerInput playerInput;
     InputAction moveAction;
     Rigidbody rb;
+    Animator animation; 
 
     public float speed = 5f; 
 
