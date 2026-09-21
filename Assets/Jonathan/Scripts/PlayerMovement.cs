@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     
 
-    public float speed = 5f; 
+    public float speed = 5f;
 
 
     void Start()
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         moveAction = playerInput.actions.FindAction("Move");
-        _animation = GetComponent<Animator>();
+        _animation = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _animation.SetBool("isWalk", true); 
         }
-        else 
+        else if (moveInput.magnitude <= 0f) 
         {
             _animation.SetBool("isWalk", false); 
         }
