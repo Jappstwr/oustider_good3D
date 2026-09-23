@@ -53,7 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _animation: {fileID: 7126467264850664118}
   speed: 20
-  currentPlayerSpeed: 0
 --- !u!114 &2095644559010828228
 MonoBehaviour:
   m_ObjectHideFlags: 0
