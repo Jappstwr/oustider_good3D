@@ -6,23 +6,29 @@ using UnityEngine.Animations;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement Settings")]
     [SerializeField] private float _walkSpeed = 15.0f;
     [SerializeField] private float _runSpeed = 25.0f;
 
     [SerializeField] private float _jumpForce = 8.0f;
     [SerializeField] private float _gravity = 20.0f;
 
+    [Header("Mouse Settings")]
     [SerializeField] private float _lookSensitivity = 0.2f;
     [SerializeField] private float _lookAngleLimit = 85f;
 
-    [SerializeField] private float _bobFrequency = 10.0f;
-    [SerializeField] private float _bobAmount = 1f;
-    [SerializeField] private float _bobSmoothSpeed = 10.0f;
+    [Header("View Bobbing")]
+    [SerializeField] private Animator _camAnim;
+
+    //[SerializeField] private float _bobFrequency = 10.0f;
+    //[SerializeField] private float _bobAmount = 1f;
+    //[SerializeField] private float _bobSmoothSpeed = 10.0f;
 
     private float _bobTimer = 0f;
     private Vector3 _cameraStartingPos;
 
-    private Camera _mainCamera;
+    [Header("Input system + Camera Settings")]
+    //private Camera _mainCamera;
     private CharacterController _characterController;
 
     private InputAction _moveInput;
@@ -52,10 +58,10 @@ public class PlayerMovement : MonoBehaviour
     {
 
 
-        _mainCamera = GetComponentInChildren<Camera>();
+        //_mainCamera = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
 
-        _cameraStartingPos = _mainCamera.transform.localPosition;
+        //_cameraStartingPos = _mainCamera.transform.localPosition;
 
         _moveInput = InputSystem.actions.FindAction("Move");
         _runInput = InputSystem.actions.FindAction("Sprint");
@@ -88,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
             _jumped = false;
         }
 
-
         if (_runInput.WasPressedThisFrame())
         {
             currentMoveSpeed = _runSpeed;
@@ -97,9 +102,19 @@ public class PlayerMovement : MonoBehaviour
         {
             currentMoveSpeed = _walkSpeed;
         }
+
+        if (moveVector.magnitude >= 0.1f)
+        {
+            _camAnim.SetTrigger("walk");
+        }
+        else
+        {
+            _camAnim.SetTrigger("idle");
+        }
+
         HandleMovement(moveVector);
         HandleLook(mouseDelta);
-        HandleHeadBob(moveVector);
+       // HandleHeadBob(moveVector);
     }
     private void FixedUpdate()
     {
@@ -144,31 +159,31 @@ public class PlayerMovement : MonoBehaviour
         lookAngle += -mouseDelta.y * _lookSensitivity;
         lookAngle = Mathf.Clamp(lookAngle, -_lookAngleLimit, _lookAngleLimit);
 
-        _mainCamera.transform.localRotation = Quaternion.Euler(lookAngle, 0, 0);
+        //_mainCamera.transform.localRotation = Quaternion.Euler(lookAngle, 0, 0);
         transform.rotation *= Quaternion.Euler(0, mouseDelta.x * _lookSensitivity, 0);
     }
-    private void HandleHeadBob(Vector2 moveVector)
-    {
+    //private void HandleHeadBob(Vector2 moveVector)
+    //{
 
-        bool isMoving = moveVector.sqrMagnitude > 0.01f;
+    //    bool isMoving = moveVector.sqrMagnitude > 0.01f;
 
-        if (_characterController.isGrounded && isMoving)
-        {
-            float speedMultiplier = (currentMoveSpeed / _walkSpeed);
-            _bobTimer += Time.deltaTime * _bobFrequency * speedMultiplier;
+    //    if (_characterController.isGrounded && isMoving)
+    //    {
+    //        float speedMultiplier = (currentMoveSpeed / _walkSpeed);
+    //        _bobTimer += Time.deltaTime * _bobFrequency * speedMultiplier;
 
-            float bobY = Mathf.Sin(_bobTimer) * _bobAmount;
-            float bobX = Mathf.Cos(_bobTimer * 0.5f) * (_bobAmount * 0.5f);
+    //        float bobY = Mathf.Sin(_bobTimer) * _bobAmount;
+    //        float bobX = Mathf.Cos(_bobTimer * 0.5f) * (_bobAmount * 0.5f);
 
-            Vector3 targetBobPos = _cameraStartingPos + new Vector3(bobX, bobY, 0);
-            _mainCamera.transform.localPosition = Vector3.Lerp(_mainCamera.transform.localPosition, targetBobPos, Time.deltaTime * _bobSmoothSpeed);
-        }
-        else
-        {
-            _bobTimer = 0f;
-            _mainCamera.transform.localPosition = Vector3.Lerp(_mainCamera.transform.localPosition, _cameraStartingPos, Time.deltaTime * _bobSmoothSpeed);
-        }
-    }
+    //        Vector3 targetBobPos = _cameraStartingPos + new Vector3(bobX, bobY, 0);
+    //        _mainCamera.transform.localPosition = Vector3.Lerp(_mainCamera.transform.localPosition, targetBobPos, Time.deltaTime * _bobSmoothSpeed);
+    //    }
+    //    else
+    //    {
+    //        _bobTimer = 0f;
+    //        _mainCamera.transform.localPosition = Vector3.Lerp(_mainCamera.transform.localPosition, _cameraStartingPos, Time.deltaTime * _bobSmoothSpeed);
+    //    }
+    //}
 
     private void Jumped(InputAction.CallbackContext context)
     {
