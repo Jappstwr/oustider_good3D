@@ -2350,9 +2350,7 @@ MonoBehaviour:
   _gravity: 20
   _lookSensitivity: 0.2
   _lookAngleLimit: 85
-  _bobFrequency: 10
-  _bobAmount: 1
-  _bobSmoothSpeed: 10
+  _camAnim: {fileID: 0}
 --- !u!1 &8367250604657761110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,7 +2410,7 @@ Transform:
   m_GameObject: {fileID: 7201790047787283333}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -195.1, y: 1.9, z: -145.8}
+  m_LocalPosition: {x: -195.1, y: 5.69, z: -190.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2427,7 +2425,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7201790047787283333}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ead17160e5e3ef459e7cdfe01f2134e, type: 3}
   m_Name: 
