@@ -33,15 +33,17 @@ public class PlayerMovement : MonoBehaviour
 
     private InputAction _moveInput;
     private InputAction _runInput;
+    //private bool _running = false; 
 
     private InputAction _jumpInput;
     private bool _jumped = false;
 
 
-    private float currentMoveSpeed;
+    [SerializeField] private float currentMoveSpeed;
     private Vector3 moveDirection = Vector3.zero;
     private float lookAngle = 0.0f;
 
+    
 
     //PlayerInput playerInput;
     //InputAction moveAction;
@@ -64,7 +66,11 @@ public class PlayerMovement : MonoBehaviour
         //_cameraStartingPos = _mainCamera.transform.localPosition;
 
         _moveInput = InputSystem.actions.FindAction("Move");
+
         _runInput = InputSystem.actions.FindAction("Sprint");
+        //_runInput.started += Running; 
+
+
         _jumpInput = InputSystem.actions.FindAction("Jump");
         _jumpInput.started += Jumped;
 
@@ -87,14 +93,17 @@ public class PlayerMovement : MonoBehaviour
         Vector2 moveVector = _moveInput.ReadValue<Vector2>();
         Vector2 mouseDelta = new Vector2(Mouse.current.delta.x.ReadValue(), Mouse.current.delta.y.ReadValue());
 
+        bool isMoving = moveVector.magnitude > 0.01f;
+        bool isRunning = _runInput.IsPressed();
 
+        //Something resets run back to walk speed directly!!!
 
         if (!_characterController.isGrounded)
         {
             _jumped = false;
         }
 
-        if (_runInput.WasPressedThisFrame())
+        if (_runInput.IsPressed())
         {
             currentMoveSpeed = _runSpeed;
         }
@@ -103,14 +112,15 @@ public class PlayerMovement : MonoBehaviour
             currentMoveSpeed = _walkSpeed;
         }
 
-        if (moveVector.magnitude >= 0.1f)
-        {
-            _camAnim.SetTrigger("walk");
-        }
-        else
-        {
-            _camAnim.SetTrigger("idle");
-        }
+
+        _camAnim.SetBool("isWalk", isMoving && !isRunning);
+
+        
+        _camAnim.SetBool("isRun", isMoving && isRunning);
+
+        
+        _camAnim.SetBool("isIdle", !isMoving);
+
 
         HandleMovement(moveVector);
         HandleLook(mouseDelta);
@@ -189,5 +199,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _jumped = true;
     }
-
+    //private void Running(InputAction.CallbackContext context)
+    //{
+    //    _running = true; 
+    //}
 }
