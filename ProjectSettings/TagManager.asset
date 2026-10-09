@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Pickupable
-  - SewersCube
+  - Interactable
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "Inspection",
+    "maps": [
+        {
+            "name": "Inspecting",
+            "id": "77a0a24c-0a75-4bb1-9b1a-872ad80e4f7f",
+            "actions": [
+                {
+                    "name": "Drag",
+                    "type": "Button",
+                    "id": "4cd58a20-9b4b-4ceb-b16f-1ab54e4c0013",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Exit",
+                    "type": "Button",
+                    "id": "b7b20bdd-cd2f-45f8-9906-77358fcc1afe",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2fa06b98-d7c4-4774-af56-2ec813a41a6c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8244db9-681d-43cd-8610-10900d8eb6c8",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

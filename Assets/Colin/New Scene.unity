@@ -1119,13 +1119,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040101371}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ead17160e5e3ef459e7cdfe01f2134e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickupable
-  player: {fileID: 1353242140}
-  _camera: {fileID: 5902058496657021905}
+  holdingItem: 0
   maxDistance: 7
 --- !u!65 &2040101377
 BoxCollider:
@@ -1474,6 +1473,7 @@ GameObject:
   - component: {fileID: 2488826650407751034}
   - component: {fileID: 9135260338199761754}
   - component: {fileID: 320896892368800166}
+  - component: {fileID: 9135260338199761755}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1944,6 +1944,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &9135260338199761755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926964158346707150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ead17160e5e3ef459e7cdfe01f2134e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable
+  holdingItem: 0
+  maxDistance: 7
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
