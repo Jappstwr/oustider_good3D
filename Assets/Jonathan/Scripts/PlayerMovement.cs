@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float _walkSpeed = 15.0f;
     [SerializeField] private float _runSpeed = 25.0f;
+    [SerializeField] private float _crouchSpeed = 8.0f; 
 
     [SerializeField] private float _jumpForce = 8.0f;
     [SerializeField] private float _gravity = 20.0f;
@@ -24,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] private float _bobAmount = 1f;
     //[SerializeField] private float _bobSmoothSpeed = 10.0f;
 
-    private float _bobTimer = 0f;
-    private Vector3 _cameraStartingPos;
 
     [Header("Input system + Camera Settings")]
     //private Camera _mainCamera;
@@ -34,14 +33,18 @@ public class PlayerMovement : MonoBehaviour
     private InputAction _moveInput;
     private InputAction _runInput;
 
+    private InputAction _crouchInput; 
+
     private InputAction _jumpInput;
     private bool _jumped = false;
 
 
-    private float currentMoveSpeed;
+
+    [SerializeField] private float currentMoveSpeed;
     private Vector3 moveDirection = Vector3.zero;
     private float lookAngle = 0.0f;
 
+    
 
     //PlayerInput playerInput;
     //InputAction moveAction;
@@ -64,7 +67,11 @@ public class PlayerMovement : MonoBehaviour
         //_cameraStartingPos = _mainCamera.transform.localPosition;
 
         _moveInput = InputSystem.actions.FindAction("Move");
+
         _runInput = InputSystem.actions.FindAction("Sprint");
+
+        _crouchInput = InputSystem.actions.FindAction("Crouch"); 
+
         _jumpInput = InputSystem.actions.FindAction("Jump");
         _jumpInput.started += Jumped;
 
@@ -87,30 +94,59 @@ public class PlayerMovement : MonoBehaviour
         Vector2 moveVector = _moveInput.ReadValue<Vector2>();
         Vector2 mouseDelta = new Vector2(Mouse.current.delta.x.ReadValue(), Mouse.current.delta.y.ReadValue());
 
+        bool isMoving = moveVector.magnitude > 0.01f;
+        bool isRunning = _runInput.IsPressed();
+        bool isCrouching = _crouchInput.IsPressed(); 
 
+        //Something resets run back to walk speed directly!!!
 
         if (!_characterController.isGrounded)
         {
             _jumped = false;
         }
 
-        if (_runInput.WasPressedThisFrame())
+        if (_runInput.IsPressed())
         {
             currentMoveSpeed = _runSpeed;
+        }
+        else if (_crouchInput.IsPressed())
+        {
+            currentMoveSpeed = _crouchSpeed; 
         }
         else
         {
             currentMoveSpeed = _walkSpeed;
         }
 
-        if (moveVector.magnitude >= 0.1f)
-        {
-            _camAnim.SetTrigger("walk");
-        }
-        else
-        {
-            _camAnim.SetTrigger("idle");
-        }
+
+
+        //if (isMoving && !isRunning && !isCrouching)
+        //{
+        //    _camAnim.SetBool("isWalk", true);
+        //}
+        //else if (!isMoving)
+        //{
+        //    _camAnim.SetBool("isIdle", true);
+        //}
+        //else if (!isMoving && isCrouching && !isRunning)
+        //{
+        //    _camAnim.SetBool("isCrouch", true);
+        //}
+        //else if (isMoving && isCrouching && !isRunning)
+        //{
+        //    _camAnim.SetBool("isCrouchWalk", true); 
+        //}
+
+
+        _camAnim.SetBool("isWalk", isMoving && !isRunning && !isCrouching);
+
+        _camAnim.SetBool("isRun", isMoving && isRunning);
+
+        _camAnim.SetBool("isIdle", !isMoving && !isCrouching);
+
+        _camAnim.SetBool("isCrouch", !isMoving && isCrouching && !isRunning);
+
+        _camAnim.SetBool("isCrouchWalk", isMoving && isCrouching && !isRunning);
 
         HandleMovement(moveVector);
         HandleLook(mouseDelta);
@@ -189,5 +225,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _jumped = true;
     }
-
+    //private void Running(InputAction.CallbackContext context)
+    //{
+    //    _running = true; 
+    //}
 }
