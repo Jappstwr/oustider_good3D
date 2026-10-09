@@ -3,12 +3,13 @@ using UnityEngine.InputSystem;
 
 public class Pickupable : MonoBehaviour
 {
-    private bool holdingItem;
+    public bool holdingItem;
     private Rigidbody rb;
-    public Transform player;
-    public Transform _camera;
+    private Transform player;
+    private Transform _camera;
     public float maxDistance = 5;
     private float cooldown;
+    private Transform item;
 
     InputAction _pickupAction; 
 
@@ -17,44 +18,24 @@ public class Pickupable : MonoBehaviour
     void Start()
     {
         _pickupAction = InputSystem.actions.FindAction("Interact"); 
+        player = transform.GetChild(0).GetChild(0);
+        _camera = transform.GetChild(1).GetChild(0);
     }
 
     void Update()
     {
         cooldown--;
+        Drop();
+        Grab();
+        Interactable();
 
-        if (holdingItem && _pickupAction.WasPressedThisFrame() && cooldown <= 0)
-        {
-            transform.SetParent(null);
-            transform.GetComponent<Rigidbody>().useGravity = true;
-            transform.GetComponent<Rigidbody>().isKinematic = false;
-            holdingItem = false;
-            cooldown = 10;
-        }
-
-
-
-        RaycastHit hit;
-        if (Physics.Raycast(_camera.position, _camera.forward, out hit, maxDistance) && hit.collider.gameObject.CompareTag("Pickupable") && !holdingItem && cooldown <= 0)
-        {
-            if (_pickupAction.WasPressedThisFrame())
-            {
-                transform.SetParent(player,false);
-                transform.GetComponent<Rigidbody>().useGravity = false;
-                transform.GetComponent<Rigidbody>().isKinematic = true;
-                transform.localPosition = new Vector3(0, 0, 0);
-                transform.localRotation = Quaternion.identity;
-                holdingItem = true;
-                cooldown = 10;
-            }
-        }
     }
 
     public void Grab()
     {
         Transform holdPoint = transform.GetChild(0).GetChild(0);
         RaycastHit hit;
-        if (Physics.Raycast(_camera.position, _camera.forward, out hit, maxDistance) && hit.collider.gameObject.CompareTag("Pickupable") && !holdingItem)
+        if (Physics.Raycast(_camera.position, _camera.forward, out hit, maxDistance) && hit.collider.gameObject.CompareTag("Pickupable") && !holdingItem && cooldown <= 0)
         {
 
             if (_pickupAction.WasPressedThisFrame())
@@ -64,27 +45,36 @@ public class Pickupable : MonoBehaviour
                 hit.collider.gameObject.transform.SetParent(holdPoint, false);
 
                 obj.GetComponent<Rigidbody>().isKinematic = true;
+                obj.GetComponent<Rigidbody>().useGravity = false;
                 obj.transform.localPosition = Vector3.zero;
                 obj.transform.localRotation = Quaternion.identity;
 
+                item = obj;
+
                 holdingItem = true;
+                cooldown = 10;
             }
         }
     }
 
     public void Drop()
     {
-        if (holdingItem && _pickupAction.WasPressedThisFrame())
+        if (holdingItem && _pickupAction.WasPressedThisFrame() && cooldown <= 0)
         {
-            int count = transform.childCount;
-            for (int i = 0; i < count; i++)
-            {
-                if (transform.GetChild(i).CompareTag("Pickupable"))
-                {
-                    transform.GetChild(i).transform.SetParent(null);
+            item.SetParent(null);
+                    item.GetComponent<Rigidbody>().isKinematic = false;
+                    item.GetComponent<Rigidbody>().useGravity = true;
                     holdingItem = false;
-                }
-            }
+                    cooldown = 10;
+        }
+    }
+
+    public void Interactable()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(_camera.position, _camera.forward, out hit, maxDistance) && hit.collider.gameObject.CompareTag("Interactable") && _pickupAction.WasPressedThisFrame())
+        {
+            hit.collider.GetComponent<WalletLogic>().Interacted();
         }
     }
 }
