@@ -1432,7 +1432,7 @@ GameObject:
   - component: {fileID: 59274969}
   - component: {fileID: 59274968}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: SewerEntrance
   m_TagString: SewersCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
