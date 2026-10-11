@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pickupable
   - Interactable
+  - Monster
   layers:
   - Default
   - TransparentFX
