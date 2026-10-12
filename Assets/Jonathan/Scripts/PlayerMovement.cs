@@ -114,13 +114,13 @@ public class PlayerMovement : MonoBehaviour
         else if (_crouchInput.IsPressed())
         {
             isHidden = true; 
-            transform.GetComponent<CharacterController>().height = 2.0f; 
+            transform.GetComponent<CapsuleCollider>().height = 2.0f; 
             currentMoveSpeed = _crouchSpeed; 
         }
         else
         {
             isHidden = false; 
-            transform.GetComponent<CharacterController>().height = 8.25f; 
+            transform.GetComponent<CapsuleCollider>().height = 8.25f; 
             currentMoveSpeed = _walkSpeed;
         }
 
