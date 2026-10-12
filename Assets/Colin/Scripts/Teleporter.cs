@@ -22,6 +22,7 @@ public class Teleporter : MonoBehaviour
             reached = true;
             other.GetComponent<MonsterBehavoir>().currentPoint++;
             other.transform.position = teleportPoint.position;
+            other.GetComponent<MonsterBehavoir>().speed = 10;
         }
     }
 }
