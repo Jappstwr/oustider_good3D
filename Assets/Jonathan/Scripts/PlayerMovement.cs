@@ -39,8 +39,6 @@ public class PlayerMovement : MonoBehaviour
     private InputAction _jumpInput;
     private bool _jumped = false;
 
-
-
     [SerializeField] private float currentMoveSpeed;
     private Vector3 moveDirection = Vector3.zero;
     private float lookAngle = 0.0f;
@@ -105,7 +103,10 @@ public class PlayerMovement : MonoBehaviour
         if (!_characterController.isGrounded)
         {
             _jumped = false;
+            
         }
+
+    
 
         if (_runInput.IsPressed())
         {
@@ -113,34 +114,16 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (_crouchInput.IsPressed())
         {
-             
-            transform.GetComponentInChildren<CapsuleCollider>().height = 2.0f; 
-            currentMoveSpeed = _crouchSpeed; 
+
+            transform.GetComponentInChildren<CapsuleCollider>().height = 2.0f;
+            currentMoveSpeed = _crouchSpeed;
         }
         else
-        { 
-            transform.GetComponentInChildren<CapsuleCollider>().height = 8.25f; 
+        {
+            transform.GetComponentInChildren<CapsuleCollider>().height = 8.25f;
             currentMoveSpeed = _walkSpeed;
+            
         }
-
-
-
-        //if (isMoving && !isRunning && !isCrouching)
-        //{
-        //    _camAnim.SetBool("isWalk", true);
-        //}
-        //else if (!isMoving)
-        //{
-        //    _camAnim.SetBool("isIdle", true);
-        //}
-        //else if (!isMoving && isCrouching && !isRunning)
-        //{
-        //    _camAnim.SetBool("isCrouch", true);
-        //}
-        //else if (isMoving && isCrouching && !isRunning)
-        //{
-        //    _camAnim.SetBool("isCrouchWalk", true); 
-        //}
 
 
         _camAnim.SetBool("isWalk", isMoving && !isRunning && !isCrouching);
