@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("View Bobbing")]
     [SerializeField] private Animator _camAnim;
+    private Collider col; 
 
     //[SerializeField] private float _bobFrequency = 10.0f;
     //[SerializeField] private float _bobAmount = 1f;
@@ -64,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         //_mainCamera = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
 
+        col = GetComponent<Collider>(); 
         //_cameraStartingPos = _mainCamera.transform.localPosition;
 
         _moveInput = InputSystem.actions.FindAction("Move");
@@ -111,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (_crouchInput.IsPressed())
         {
+            
             currentMoveSpeed = _crouchSpeed; 
         }
         else
