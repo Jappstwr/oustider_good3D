@@ -21,7 +21,7 @@ public class PlayerFootStep : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.DrawRay(RaycastStart.position, RaycastStart.transform.up * range * -1, Color.green); 
     }
 
     public void FootSteps()
