@@ -7,6 +7,9 @@ TagManager:
   - Pickupable
   - Interactable
   - Monster
+  - SewersCube
+  - stone
+  - grass
   layers:
   - Default
   - TransparentFX
@@ -14,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 

@@ -39,8 +39,6 @@ public class PlayerMovement : MonoBehaviour
     private InputAction _jumpInput;
     private bool _jumped = false;
 
-    public AudioSource _footStepAudioSource;
-
     [SerializeField] private float currentMoveSpeed;
     private Vector3 moveDirection = Vector3.zero;
     private float lookAngle = 0.0f;
@@ -108,14 +106,7 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
-        if (!_moveInput.IsPressed())
-        {
-            _footStepAudioSource.enabled = false; 
-        }
-        else
-        {
-            _footStepAudioSource.enabled = true;
-        }
+    
 
         if (_runInput.IsPressed())
         {
