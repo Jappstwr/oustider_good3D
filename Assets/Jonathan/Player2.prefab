@@ -236,7 +236,6 @@ GameObject:
   - component: {fileID: 2334545917354478182}
   - component: {fileID: 8623299861719906516}
   - component: {fileID: 3917579747304551697}
-  - component: {fileID: 3894809826838200619}
   - component: {fileID: 2462459212084425330}
   - component: {fileID: 962370391973589852}
   - component: {fileID: 743581057228449170}
@@ -299,29 +298,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLook
   cameraTransform: {fileID: 8565139749595307925}
   sensitivity: 0.1
---- !u!136 &3894809826838200619
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4784192360458032220}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.76730347
-  m_Height: 9.569641
-  m_Direction: 1
-  m_Center: {x: 0.017547607, y: 4.568939, z: 0}
 --- !u!143 &2462459212084425330
 CharacterController:
   m_ObjectHideFlags: 0

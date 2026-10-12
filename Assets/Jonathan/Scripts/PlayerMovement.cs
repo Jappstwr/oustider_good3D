@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("View Bobbing")]
     [SerializeField] private Animator _camAnim;
-    private bool isHidden = false; 
+    private bool isHidden; 
 
     //[SerializeField] private float _bobFrequency = 10.0f;
     //[SerializeField] private float _bobAmount = 1f;
@@ -113,13 +113,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (_crouchInput.IsPressed())
         {
-            isHidden = true; 
+             
             transform.GetComponentInChildren<CapsuleCollider>().height = 2.0f; 
             currentMoveSpeed = _crouchSpeed; 
         }
         else
-        {
-            isHidden = false; 
+        { 
             transform.GetComponentInChildren<CapsuleCollider>().height = 8.25f; 
             currentMoveSpeed = _walkSpeed;
         }
