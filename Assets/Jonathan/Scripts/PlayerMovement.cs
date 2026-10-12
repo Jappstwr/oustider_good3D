@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            transform.GetComponent<CapsuleCollider>().height = 4.568939f; 
+            transform.GetComponent<CapsuleCollider>().height = 9.569641f; 
             currentMoveSpeed = _walkSpeed;
         }
 
