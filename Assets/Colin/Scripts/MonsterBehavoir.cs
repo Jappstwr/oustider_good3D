@@ -11,7 +11,8 @@ public class MonsterBehavoir : MonoBehaviour
         Idle,
         Chase,
         Wait,
-        Search
+        Search,
+        Hunt
     }
     public Transform path;
     public Transform searchPath;
@@ -19,6 +20,7 @@ public class MonsterBehavoir : MonoBehaviour
     private List<Transform> points = new List<Transform>();
     public Transform teleportPoint;
     public Transform doorPoint;
+    public Transform player;
     private Rigidbody rb;
     public float speed;
     public int currentPoint = -1;
@@ -89,9 +91,10 @@ public class MonsterBehavoir : MonoBehaviour
             RaycastHit hit;
             for (float i = -rayCastDegrees; i < rayCastDegrees; i++)
             {
-                if (Physics.Raycast(this.gameObject.transform.position, Quaternion.Euler(0, i, 0) * this.gameObject.transform.forward * rayCastLenght, out hit) && hit.collider.gameObject.CompareTag("Player"))
+                if (Physics.Raycast(this.gameObject.transform.position, Quaternion.Euler(0, i, 0) * this.gameObject.transform.forward * rayCastLenght, out hit) && 
+                    hit.collider.gameObject.CompareTag("Player"))
                 {
-                    Debug.Log("Hit");
+                    state = State.Hunt;
                 }
                 Debug.DrawRay(this.gameObject.transform.position, Quaternion.Euler(0, i, 0) * this.gameObject.transform.forward * rayCastLenght, Color.red, rayCastDuration);
             }
@@ -105,6 +108,18 @@ public class MonsterBehavoir : MonoBehaviour
                 waitTime = initialWaitTime;
                 state = State.Search;
             }
+        }
+
+        if (state == State.Hunt)
+        {
+            float step = speed * Time.deltaTime;
+            Transform target = player;
+            transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+
+            var lookPos = target.position - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
         }
 
         //if (state == State.Chase2)
