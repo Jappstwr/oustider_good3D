@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Jonathan/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/gameMap/MainMenu/MainMenu.unity
+    guid: 77d00723f942dc14a95fe8bb93f84731
+  - enabled: 1
     path: Assets/gameMap/GameFolder/Game.unity
     guid: 78e03a61baff1694898c54074b199247
   - enabled: 1
     path: Assets/Colin/SewerScene.unity
     guid: 764f980c48eafe243b52ac16da0f08e1
-  - enabled: 1
-    path: Assets/gameMap/MainMenu/MainMenu.unity
-    guid: 77d00723f942dc14a95fe8bb93f84731
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
