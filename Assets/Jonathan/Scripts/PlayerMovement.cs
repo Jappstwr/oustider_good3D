@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isHidden;
 
     [Header("Script")]
-    public bool canMove; 
+    public bool canMove = true; 
 
     //[SerializeField] private float _bobFrequency = 10.0f;
     //[SerializeField] private float _bobAmount = 1f;
@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-
+        canMove = true; 
 
         //_mainCamera = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
