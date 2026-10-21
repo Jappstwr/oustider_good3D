@@ -41,11 +41,11 @@ public class CashierScript : MonoBehaviour
         if (other.CompareTag("Register"))
         {
             Debug.Log("Loaf has been detected");
-            _cashierAnim.SetTrigger("walk");
+            _cashierAnim.SetBool("isWalk", true);
         }
         else
         {
-            _cashierAnim.SetTrigger("idle");
+            _cashierAnim.SetBool("isIdle", true);
         }
     }
 
