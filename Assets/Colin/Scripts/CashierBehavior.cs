@@ -16,6 +16,7 @@ public class CashierBehavior : MonoBehaviour
 
     private Vector3 initialPos;
     public Transform banterPos;
+    public Transform leave;
     void Start()
     {
         source = GetComponent<AudioSource>();
@@ -58,5 +59,6 @@ public class CashierBehavior : MonoBehaviour
     public void StartEnd()
     {
         source.PlayOneShot(endPoint);
+        leave.GetComponent<DogContinueTrigger>().readyToGo = true;
     }
 }

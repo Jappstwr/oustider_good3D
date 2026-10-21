@@ -21,6 +21,7 @@ public class TriggerCheckout : MonoBehaviour
         {
             triggered = true;
             Cashier.GetComponent<CashierBehavior>().StartCheckout();
+            transform.GetComponent<BoxCollider>().enabled = false;
         }
     }
 }
