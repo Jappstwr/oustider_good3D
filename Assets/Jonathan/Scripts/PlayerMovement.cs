@@ -20,7 +20,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("View Bobbing")]
     [SerializeField] private Animator _camAnim;
-    private bool isHidden; 
+    private bool isHidden;
+
+    [Header("Script")]
+    public bool canMove; 
 
     //[SerializeField] private float _bobFrequency = 10.0f;
     //[SerializeField] private float _bobAmount = 1f;
@@ -105,7 +108,10 @@ public class PlayerMovement : MonoBehaviour
             _jumped = false;
             
         }
-
+        if (!canMove)
+        {
+            return; 
+        }
     
 
         if (_runInput.IsPressed())
