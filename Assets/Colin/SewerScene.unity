@@ -4026,6 +4026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 6076380169322797607, guid: 5ffe5913a93c34041be7deb8ef1de77d, type: 3}
+      propertyPath: canMove
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7462000889856195691, guid: 5ffe5913a93c34041be7deb8ef1de77d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -116
@@ -5613,9 +5617,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6522fed69551e428b05759c3c83695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WalletLogic
-  _camera: {fileID: 0}
+  player: {fileID: 24230898}
+  _camera: {fileID: 1941017101}
   InspectionCamera: {fileID: 1941017101}
-  InspectionWallet: {fileID: 0}
+  InspectionWallet: {fileID: 1041032166}
 --- !u!54 &1608641125
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6174,7 +6179,8 @@ MonoBehaviour:
   objectToInspect: {fileID: 1041032166}
   rotationSpeed: 0.2
   InspectionCamera: {fileID: 1941017102}
-  PlayerCamera: {fileID: 0}
+  PlayerCamera: {fileID: 2104913408}
+  player: {fileID: 24230898}
 --- !u!114 &1941017099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6837,6 +6843,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12faeaf10cfe1548a7c5b38eb216302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Points
+--- !u!4 &2104913408 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5902058496567071193, guid: 5ffe5913a93c34041be7deb8ef1de77d, type: 3}
+  m_PrefabInstance: {fileID: 1128549822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &796480920684234397
 PrefabInstance:
   m_ObjectHideFlags: 0

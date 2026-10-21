@@ -15,7 +15,7 @@ public class InspectSystem : MonoBehaviour
     public Transform InspectionCamera;
     public Transform PlayerCamera;
 
-    public Transform ObjectToGetScript;
+    public Transform player;
     void Start()
     {
         //drag = InputSystem.actions.FindAction("Drag");
@@ -48,7 +48,7 @@ public class InspectSystem : MonoBehaviour
             }
             if (exit.WasPressedThisFrame())
             {
-                ObjectToGetScript.GetComponent<WalletLogic>().IsInspecting = false;
+                player.GetComponent<PlayerMovement>().canMove = true;
                 PlayerCamera.GetComponent<Camera>().enabled = true;
                 InspectionCamera.GetComponent<Camera>().enabled = false;
                 Cursor.lockState = CursorLockMode.Locked;
