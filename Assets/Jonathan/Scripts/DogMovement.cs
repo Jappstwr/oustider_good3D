@@ -8,7 +8,8 @@ public class DogMovement : MonoBehaviour
 
     [Header("Dog Settings")]
     [SerializeField] private float walkSpeed = 16f;
-    [SerializeField] private float currentSpeed; 
+    [SerializeField] private float currentSpeed;
+    [SerializeField] private Animator _dogAnim; 
 
     public Rigidbody rb;
 
@@ -61,18 +62,23 @@ public class DogMovement : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180, 0);
 
+            _dogAnim.SetBool("isWalk", true); 
+
         }
         else
         {
             if (currentWayPoint == stopAtWaypoint)
             {
-                isWaiting = true; 
+                isWaiting = true;
+                _dogAnim.SetBool("isIdle", true); 
             }
             else
             {
                 currentWayPoint++; 
             }
         }
+
+
     }
 
     public void ContinueWalk()
