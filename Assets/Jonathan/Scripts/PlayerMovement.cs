@@ -14,9 +14,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce = 8.0f;
     [SerializeField] private float _gravity = 20.0f;
 
-    [Header("Mouse Settings")]
-    [SerializeField] private float _lookSensitivity = 0.2f;
-    [SerializeField] private float _lookAngleLimit = 85f;
+    //[Header("Mouse Settings")]
+    //[SerializeField] private float _lookSensitivity = 0.2f;
+    //[SerializeField] private float _lookAngleLimit = 85f;
 
     [Header("View Bobbing")]
     [SerializeField] private Animator _camAnim;
@@ -44,9 +44,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float currentMoveSpeed;
     private Vector3 moveDirection = Vector3.zero;
-    private float lookAngle = 0.0f;
+    //private float lookAngle = 0.0f;
 
-    
+
 
     //PlayerInput playerInput;
     //InputAction moveAction;
@@ -186,11 +186,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleLook(Vector2 mouseDelta)
     {
-        lookAngle += -mouseDelta.y * _lookSensitivity;
-        lookAngle = Mathf.Clamp(lookAngle, -_lookAngleLimit, _lookAngleLimit);
+        //lookAngle += -mouseDelta.y * _lookSensitivity;
+        //lookAngle = Mathf.Clamp(lookAngle, -_lookAngleLimit, _lookAngleLimit);
 
-        //_mainCamera.transform.localRotation = Quaternion.Euler(lookAngle, 0, 0);
-        transform.rotation *= Quaternion.Euler(0, mouseDelta.x * _lookSensitivity, 0);
+        ////_mainCamera.transform.localRotation = Quaternion.Euler(lookAngle, 0, 0);
+        //transform.rotation *= Quaternion.Euler(0, mouseDelta.x * _lookSensitivity, 0);
     }
     //private void HandleHeadBob(Vector2 moveVector)
     //{

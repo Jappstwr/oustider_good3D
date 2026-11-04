@@ -7,6 +7,8 @@ public class PlayerLook : MonoBehaviour
 
     InputAction rotationAction;
 
+    [SerializeField] private float smoothSpeed; 
+
     public Transform cameraTransform;
     public float sensitivity = 0.2f;
 
@@ -26,7 +28,7 @@ public class PlayerLook : MonoBehaviour
     {
         Vector2 mouseDelta = rotationAction.ReadValue<Vector2>();
 
-        transform.Rotate(Vector3.up * mouseDelta.x * sensitivity);
+        transform.Rotate(Vector3.up * mouseDelta.x * sensitivity * smoothSpeed);
 
         rotationX -= mouseDelta.y * sensitivity;
         rotationX = Mathf.Clamp(rotationX, -85f, 85f);
