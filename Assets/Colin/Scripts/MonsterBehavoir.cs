@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI; 
 
 public class MonsterBehavoir : MonoBehaviour
 {
@@ -35,14 +36,26 @@ public class MonsterBehavoir : MonoBehaviour
     public int rayCastDegrees;
     public float rayCastDuration;
 
+    NavMeshAgent agent;  
+
     public State state;
     void Start()
     {
         waitTime = initialWaitTime;
         state = State.Idle;
+        agent = GetComponent<NavMeshAgent>(); 
         rb = GetComponent<Rigidbody>();
         GetPoints();
         GetSearchPoints();
+
+        //if (player == null)
+        //{
+        //    GameObject p = GameObject.FindGameObjectWithTag("Player");
+        //    if (p != null)
+        //    {
+        //        player = p.transform;
+        //    }
+        //}
     }
 
     public void GetPoints()

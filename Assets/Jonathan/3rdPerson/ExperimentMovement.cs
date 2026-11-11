@@ -108,20 +108,38 @@ public class ExperimentMovement : MonoBehaviour
         switch (newState)
         {
             case ExperimentState.Dormant:
-                if (agent.enabled) agent.isStopped = true;
-                if (animator) animator.SetBool("IsDormant", true);
+                if (agent.enabled)
+                {
+                    agent.isStopped = true;
+                }
+                if (animator)
+                {
+                    animator.SetBool("IsDormant", true);
+                }
                 break;
 
             case ExperimentState.Awakening:
-                if (agent.enabled) agent.isStopped = true;
-                if (animator) animator.SetTrigger("Awake");
+                if (agent.enabled)
+                {
+                    agent.isStopped = true;
+                }
+                if (animator)
+                {
+                    animator.SetTrigger("Awake");
+                }
                 // Delay chase until get-up animation finishes (e.g. 2s)
                 Invoke(nameof(FinishAwakening), 2.0f);
                 break;
 
             case ExperimentState.Standing:
-                if (agent.enabled) agent.isStopped = true;
-                if (animator) animator.SetBool("IsDormant", false);
+                if (agent.enabled)
+                {
+                    agent.isStopped = true;
+                }
+                if (animator)
+                {
+                    animator.SetBool("IsDormant", false);
+                }
                 break;
 
             case ExperimentState.Chasing:
@@ -130,12 +148,21 @@ public class ExperimentMovement : MonoBehaviour
                     agent.isStopped = false;
                     agent.SetDestination(playerTransform.position);
                 }
-                if (animator) animator.SetBool("IsChasing", true);
+                if (animator)
+                {
+                    animator.SetBool("IsChasing", true);
+                }
                 break;
 
             case ExperimentState.Dead:
-                if (agent.enabled) agent.isStopped = true;
-                if (animator) animator.SetTrigger("Die");
+                if (agent.enabled)
+                {
+                    agent.isStopped = true;
+                }
+                if (animator)
+                {
+                    animator.SetTrigger("Die");
+                }
                 GetComponent<Collider>().enabled = false;
                 this.enabled = false;
                 break;
@@ -162,7 +189,6 @@ public class ExperimentMovement : MonoBehaviour
 
         if (distToPlayer <= detectionRange)
         {
-            // Check cone of vision angle
             float angle = Vector3.Angle(transform.forward, dirToPlayer);
             if (angle < visionAngle / 2f)
             {
