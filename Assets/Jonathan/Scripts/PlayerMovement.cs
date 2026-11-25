@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce = 8.0f;
     [SerializeField] private float _gravity = 20.0f;
 
+
+    public float scale = 0.5f;
+    public float temporary; 
     //[Header("Mouse Settings")]
     //[SerializeField] private float _lookSensitivity = 0.2f;
     //[SerializeField] private float _lookAngleLimit = 85f;
@@ -121,16 +124,18 @@ public class PlayerMovement : MonoBehaviour
         else if (_crouchInput.IsPressed())
         {
 
-            transform.GetComponentInChildren<CapsuleCollider>().height = 2.0f;
+            //transform.GetComponentInChildren<CapsuleCollider>().height = 2.0f;
+            temporary = Mathf.MoveTowards(transform.localScale.y, scale, 0.1f); 
             currentMoveSpeed = _crouchSpeed;
         }
         else
         {
-            transform.GetComponentInChildren<CapsuleCollider>().height = 8.25f;
+            //transform.GetComponentInChildren<CapsuleCollider>().height = 8.25f;
+            temporary = Mathf.MoveTowards(transform.localScale.y, 1f, 0.1f);
             currentMoveSpeed = _walkSpeed;
             
         }
-
+        transform.localScale = new Vector3(1, temporary, 1);
 
         _camAnim.SetBool("isWalk", isMoving && !isRunning && !isCrouching);
 
